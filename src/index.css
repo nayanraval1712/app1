@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.heding{
+  background-color: brown;
+  color: wheat;
+}
+table{
+ font-style: italic;  
+}
