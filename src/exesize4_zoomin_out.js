@@ -57,10 +57,10 @@ class Nayan extends React.Component {
                                 </div>
 
                                 <div className="card-footer">
-                                    <button onClick={this.ZOOMIN} className="btn btn-btn-sucess" > ZOOM IN  + </button>
-                                    <button onClick={this.ZOOMOUT} className="btn btn-btn-info "> ZOOM OUT - </button>
-                                    <button onClick={this.rotate} className="btn btn-btn-info "> ROTED RIGHT + </button>
-                                    <button onClick={this.rotateLEFT} className="btn btn-btn-info "> ROTED LEFT - </button>
+                                    <button onClick={this.ZOOMIN}  className="btn btn-sucess" > ZOOM IN  + </button>
+                                    <button onClick={this.ZOOMOUT}  className="btn btn-info "> ZOOM OUT - </button>
+                                    <button onClick={this.rotate}  className="btn btn-info "> ROTED RIGHT + </button>
+                                    <button onClick={this.rotateLEFT}  className="btn btn-info "> ROTED LEFT - </button>
                                 </div>
                             </div>
                         </div>
