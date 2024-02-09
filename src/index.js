@@ -1,73 +1,157 @@
-// import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import React, { useState } from 'react';
-function Instapost(props) {
-    let { usename, photo } = props;
-    let [islike, setIslike] = useState(false)
-    let updateLike = function () {
-        // alert('hi ...')
-        if (islike === false) { setIslike(true) }
-        else { setIslike(false) }
+// class Nayan extends React.Component {
+//     constructor(props) {
+//         super(props)
 
-    }
-    // crating for message state verialble 
-    let [message, setMessage] = useState('')
-    let [Comment, setComment] = useState([])
-    let addComment = function () {
-        console.log(message)
-        // add message ni array useState[]
-        setComment([...Comment, message]);
-        setMessage('')
-    }
-    // now display the comments 
+//         this.state = {
+//             result: [{CauntryName :'' , FlagURL : '' , CapitalName : '' } ],
+//             CauntryName: ' ',
+//             FlagURL: '',
+//             CapitalName: ''
+//         }
+  
+//     }
+//     onInputchang = (event) => {
+//         this.setState({
+//             [event.target.name]: event.target.value
+//         })
+//     }
+//     onInputSubmit = (event) => {
+//         event.preventDefault();
+//         console.log(this.state);
 
-    let displayComments = function () {
-        let output = '';
-        output = Comment.map((item) => { return <p>{item}</p> })
-        return output
+//     }
+
+
+//     DisplyCard = (item) => {
+//         let { CauntryName, FlagURL, CapitalName } = this.state
+//         let display = <>
+//             <div className="card text-center">
+//                 <div className="card-header"> {item.CauntryName}</div>
+//                 <div className="card-body"> hello</div>
+//                 <div className="card-footer"> hello</div>
+//             </div>
+
+//         </>
+//         return display;
+//     }
+//     render() {
+//         return (
+//             <>
+
+//                 <div className="container bg-light">
+//                     <div className="col-12">
+//                         <form onSubmit={this.onInputSubmit} className="row g-2 align-items-center mt-5">
+//                             <div className="col-3 ">
+//                                 <label className="sr-only mb-3" htmlFor="input1">Cauntry Name :</label>
+//                                 <input name='CauntryName' value={this.state.CauntryName} type="text" className="form-control mb-2" id="input1" onChange={this.onInputchang} />
+//                             </div>
+//                             <div className="col-3">
+//                                 <label className="sr-only mb-3" htmlFor="input2">Flag URL</label>
+//                                 <input name="FlagURL" value={this.state.FlagURL} type="text" className="form-control mb-2" id="input2" onChange={this.onInputchang} />
+//                             </div>
+//                             <div className="col-3">
+//                                 <label className="sr-only mb-3" htmlFor="input3">Capital Name </label>
+//                                 <input name="CapitalName" value={this.state.CapitalName} type="text" className="form-control mb-2" id="input3" onChange={this.onInputchang} />
+//                             </div>
+//                             <div className="col-3">
+//                                 <button type="submit" className="btn btn-primary mt-4">Submit</button>
+//                             </div>
+//                         </form>
+//                     </div>
+
+//                 </div>
+
+//                 <div className="container mt-5">
+//                     <div className="col-5 offset-3" >
+//                         {this.state.result.map((item, index) => this.DisplyCard(item, index))}
+
+//                     </div>
+//                 </div>
+//             </>
+
+//         )
+//     }
+
+// }
+
+// root.render(<Nayan/>)
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class Nayan extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            result: [],
+            CauntryName: '',
+            FlagURL: '',
+            CapitalName: ''
+        };
     }
-    let [Number, setNumber] = useState(0)
-    const plus = () => {
-        setNumber((prevNumber) => prevNumber + 1);
+
+    onInputChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     };
-    return (
-        <div className="container mt-5">
-            <div className="col-6 offset-3">
-                <div className="card">
-                    <div className="card-header">
-                        <h3>   Name :{usename}</h3>
-                    </div>
-                    <div className="card-body">
-                        <img src={photo} className="img-fluid" />
-                        <img onClick={updateLike} src={(islike === true) ? 'like.png' : 'dislike.png'} height='50px' alt="" />
-                        {plus(Number)}
-                        <div className="row">
-                            <div className="col-9 " >
-                                <textarea value={message} onChange={(event) => setMessage(event.target.value)} className="form-control"></textarea>
+
+    onInputSubmit = (event) => {
+        event.preventDefault();
+        const { CauntryName, FlagURL, CapitalName } = this.state;
+        const Item = { CauntryName, FlagURL, CapitalName };
+        this.setState(prevState => ({
+            result: [...prevState.result, Item],
+            CauntryName: '',
+            FlagURL: '',
+            CapitalName: ''
+        }));
+    };
+
+    DisplayCard = (item, index) => {
+        return (
+            <div className="card text-center" key={index}>
+                <div className="card-header">{item.CauntryName}</div>
+                <div className="card-body">Flag URL: {item.FlagURL}</div>
+                <div className="card-footer">Capital Name: {item.CapitalName}</div>
+            </div>
+        );
+    };
+
+    render() {
+        return (
+            <>
+                <div className="container bg-light">
+                    <div className="col-12">
+                        <form onSubmit={this.onInputSubmit} className="row g-2 align-items-center mt-5">
+                            <div className="col-3">
+                                <label className="sr-only mb-3" htmlFor="input1">Country Name:</label>
+                                <input name='CauntryName' value={this.state.CauntryName} type="text" className="form-control mb-2" id="input1" onChange={this.onInputChange} />
                             </div>
                             <div className="col-3">
-                                <button className="btn btn-info" onClick={addComment}> PostComment </button>
+                                <label className="sr-only mb-3" htmlFor="input2">Flag URL:</label>
+                                <input name="FlagURL" value={this.state.FlagURL} type="text" className="form-control mb-2" id="input2" onChange={this.onInputChange} />
                             </div>
-                        </div>
-                    </div>
-                    <div className="card-footer mt-2">
-                        {displayComments()}
+                            <div className="col-3">
+                                <label className="sr-only mb-3" htmlFor="input3">Capital Name:</label>
+                                <input name="CapitalName" value={this.state.CapitalName} type="text" className="form-control mb-2" id="input3" onChange={this.onInputChange} />
+                            </div>
+                            <div className="col-3">
+                                <button type="submit" className="btn btn-primary mt-4">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    )
+
+                <div className="container mt-5">
+                    <div className="col-5 offset-3">
+                        {this.state.result.map((item, index) => this.DisplayCard(item, index))}
+                    </div>
+                </div>
+            </>
+        );
+    }
 }
-function Page() {
-    return (
-        <Instapost usename='NAYAN@GMAIL.COM' photo='https://picsum.photos/600/300?random=1' />
-    )
-}
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Page />)
 
-
-
-
-
+ReactDOM.render(<Nayan />, document.getElementById('root'));
